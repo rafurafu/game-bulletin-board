@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/search.css">
+        <script src="/static/js/search.js"></script>
+        <title>snsマッチ</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>ゲームマッチアプリ</h1>
+                <!-- 新しい投稿ボタンはいらないのでコメントアウト -->
+                <!-- <button class="tweet-btn">新しい投稿</button> -->
+            </div>
+    
+            <main role="main" id="main">    
+                <!-- 左サイドバー -->
+                <aside id="submenu" class="sidebar-left">
+                    <div class="navigation">
+                        <ul>
+                          <li class="list active">
+                            <a href="#">
+                              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                              <span class="title">ホーム</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"
+                                ><ion-icon name="person-circle-outline"></ion-icon
+                              ></span>
+                              <span class="title">プロフィール</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"><ion-icon name="tv-outline"></ion-icon></span>
+                              <span class="title">チャンネル</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"
+                                ><ion-icon name="settings-outline"></ion-icon
+                              ></span>
+                              <span class="title">設定</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"
+                                ><ion-icon name="id-card-outline"></ion-icon
+                              ></span>
+                              <span class="title">個人情報</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"
+                                ><ion-icon name="help-circle-outline"></ion-icon
+                              ></span>
+                              <span class="title">ヘルプ</span>
+                            </a>
+                          </li>
+                          <li class="list">
+                            <a href="#">
+                              <span class="icon"
+                                ><ion-icon name="log-out-outline"></ion-icon
+                              ></span>
+                              <span class="title">サインアウト</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                  
+                      <script
+                        type="module"
+                        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+                      ></script>
+                      <script
+                        nomodule
+                        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+                      ></script>
+                      <script>
+                        const list = document.querySelectorAll(".list");
+                        console.log(list);
+                        function activeLink() {
+                          list.forEach((item) =>
+                            // console.log(item);
+                            item.classList.remove("active")
+                          );
+                          this.classList.add("active");
+                        }
+                  
+                        list.forEach((item) => {
+                          item.addEventListener("click", activeLink);
+                        });
+                      </script>
+                </aside>
+    
+                <article id="content" class="tweets">
+                    <!-- 投稿一覧 -->
+                    <div class="tweet">
+                        <div class="user-info">
+                            <img src="avatar.jpg" alt="User Avatar">
+                            <div class="user-details">
+                                <span class="username">ユーザー名</span>
+                                <span class="handle">@ハンドル</span>
+                            </div>
+                        </div>
+                        <p class="tweet-text">投稿の本文がここに入ります。なんでもいいです。</p>
+                        <div class="actions">
+                            <button class="like-btn">いいね</button>
+                            <button class="reply-btn">返信</button>
+                        </div>
+                    </div>
+                    <!-- 他の投稿をここに追加 -->
+                </article>
+    
+                <!-- 右サイドバー（ツイートフォーム）-->
+                <div id="topic" class="sidebar-right">
+                    <div class="tweet-form">
+                        <div class="user-info">
+                            <h3>ユーザー情報</h3>
+                            <label for="role">役割：</label>
+                            <input type="text" id="role" placeholder="あなたの役割を入力してください">
+        
+                            <label for="number">募集する人数：</label>
+                            <input type="text" id="number" placeholder="募集する人数を入力してください">
+        
+                            <label for="rank">ランク：</label>
+                            <input type="text" id="rank" placeholder="あなたのランクを入力してください">
+                        </div>
+        
+                        <textarea id="tweetText" placeholder="何か一言追加しましょう..."></textarea>
+                        <button class="tweet-button" onclick="addTweet()">投稿</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>

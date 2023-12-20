@@ -1,63 +1,65 @@
 from flask import Flask, render_template,request,redirect,session,jsonify
-import session as ss
 import random as rd
+#import session as ss
 import json
-from model import product
+#from model
 from collections import Counter
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
 
- #ログインシステム 新規登録
-def register():
-    username = input("ユーザー名を入力してください: ")
-    password = input("パスワードを入力してください: ")
 
-def login_required(func):
-    def wrapper(*args, **kwargs):
-        if 'username' in ss:
-            #ユーザーネームがある場合はhomeに移動
-            return func(*args, **kwargs)
-        else:
-            #ユーザーネームがない場合はログイン画面に移動
-            return redirect('/')
-    return wrapper
 
- #ログイン
+
+
+
+
+
+
+
+
+
+
+
+
+app.route('/')
+def index():
+    return render_template('home.html')
+
+@app.route('/add_tweet', methods=['POST'])
+def add_tweet():
+    # フォームから送信されたJSONデータを取得
+    data = request.get_json()
+
+    # データを使って何か処理を行う（ここでは例としてコンソールに表示）
+    print(f"ユーザー情報: 役割={data['role']}, 人数={data['number']}, ランク={data['rank']}")
+    print(f"ツイート: {data['tweetText']}")
+
+    # ここでデータベースなどに保存する処理を追加できます
+
+    return jsonify({'status': 'success'})
+
+
+
 @app.route('/')
 def login():
     return render_template("login.html")
 
-@app.route('/login', methods = ["POST"])
-def loginProcess():
-    username = request.form["username"]
-    password = request.form["password"]
-    
-    print(f"USername: {username}")
-    print(f"Password:{password}")
-    #username一時的に保存
-    #username = セッション
-    if loginCheck(username, password):
-        return redirect("/home")
 
-    else:
-        return redirect("/")
-    
- #ログイン処理　、ユーザー情報の照合 #mysql
-def loginCheck(username, password):
-    users = ss.getLoginUser(username, password)
-    
-    if users[0][1] == username and users[0][2] == password:
-        session['username'] = username
-        session['id'] = users[0][0]
-        return True
-    else:
-        return False
+@app.route('/home')
+def home():
+    return render_template("home.html")
 
- #ログアウト  
-@app.route('/logout')
-def logout():
-    #ログアウトするときにセッションを消す
-    session.clear()
-    return redirect('/')
+@app.route('/match')
+def match():
+    return render_template("match.html")
 
+@app.route('/search')
+def search():
+    return render_template("search.html")
+
+
+
+if __name__ == '__main__':
+    app.run()
